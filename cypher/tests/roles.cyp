@@ -1,0 +1,1 @@
+RETURN {roles: ['admin', 'author']}
