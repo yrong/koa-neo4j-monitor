@@ -10,7 +10,8 @@ import {Authentication} from './auth';
 import {Neo4jConnection, API} from './data';
 import {createProcedure} from './procedure';
 import {haveIntersection} from './util';
-import monitor from 'koa-monitor';
+import convert from 'koa-convert';
+import monitor from 'koa-monitor-forked';
 import http from 'http';
 
 const defaultOptions = {
@@ -51,7 +52,7 @@ class KoaNeo4jApp extends Application {
         const server = http.createServer(this.callback());
         this.server = server;
         if (process.env.NODE_ENV === 'development')
-            this.use(monitor(server, {path: '/status'}));
+            this.use(convert(monitor(server, {path: '/status'})));
 
 
         this
