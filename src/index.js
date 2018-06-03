@@ -5,7 +5,6 @@ import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import cors from 'kcors';
 import queryString from 'query-string';
-import compose from 'koa-compose';
 import {Authentication} from './auth';
 import {Neo4jConnection, API} from './data';
 import {createProcedure} from './procedure';
@@ -79,15 +78,13 @@ class KoaNeo4jApp extends Application {
                 }
             });
 
-        if (Array.isArray(options.middleware))
-            this.use(compose(options.middleware));
-
-        this.use(this.router.routes());
-
         this.executeCypher = this.neo4jConnection.executeCypher;
 
-        for (const api of options.apis)
-            this.defineAPI(api);
+        if (!options.loadRouteByApp) {
+            this.use(this.router.routes());
+            for (const api of options.apis)
+                this.defineAPI(api);
+        }
     }
 
     defineAPI(options) {
