@@ -137,7 +137,7 @@ class Procedure {
                     ctx
                 ]))
                 .then(([result, params, ctx]) => postServeHook.execute(result, params, ctx));
-            return response.then(([result, params, ctx]) => result);
+            return response.then((result) => result);
         };
     }
 }
