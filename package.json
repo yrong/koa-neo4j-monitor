@@ -1,6 +1,6 @@
 {
   "name": "koa-neo4j-monitor",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "Rapidly create REST APIs, powered by Koa and Neo4j -- batteries included with built-in role based authentication via JWT and reusable backend components",
   "main": "index.js",
   "jsnext:main": "./src/index.js",
@@ -73,8 +73,6 @@
     "neo4j-driver": "^1.0.5",
     "parse-neo4j-fork": "0.6.10",
     "passport-jwt": "^2.1.0",
-    "passport-local": "^1.0.0",
-    "pythonic": "0.0.4",
-    "query-string": "^4.2.3"
+    "passport-local": "^1.0.0"
   }
 }

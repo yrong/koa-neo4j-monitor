@@ -4,7 +4,6 @@ import Application from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import cors from 'kcors';
-import queryString from 'query-string';
 import {Authentication} from './auth';
 import {Neo4jConnection, API} from './data';
 import {createProcedure} from './procedure';
@@ -103,11 +102,7 @@ class KoaNeo4jApp extends Application {
                 ctx.throw(403, 'user does not have permission for this resource');
 
             let params = {};
-            if (ctx.url.indexOf('?') >= 0) {
-                params = `?${ctx.url.split('?')[1]}`;
-                params = queryString.parse(params);
-            }
-            params = {...params, ...ctx.params, ...ctx.request.body};
+            params = {...params, ...ctx.query, ...ctx.params, ...ctx.request.body};
             ctx.body = await api.invoke(params, ctx);
             await next();
         };
