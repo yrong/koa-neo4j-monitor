@@ -37,7 +37,9 @@ class Neo4jConnection {
         const _executeCypher = (query, queryParams) => {
             return new Promise((resolve, reject) => {
                 const session = this.driver.session();
-
+                console.log(
+                    chalk.green(JSON.stringify({cypher: query, params: queryParams}, null, '\t'))
+                );
                 session.run(query, queryParams)
                     .then(result => {
                         session.close();
